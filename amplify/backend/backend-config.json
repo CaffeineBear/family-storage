@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "familystorage33c10722": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

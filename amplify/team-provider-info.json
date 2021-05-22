@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-familystorage-dev-140743-authRole",
+      "UnauthRoleArn": "arn:aws:iam::467075367265:role/amplify-familystorage-dev-140743-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::467075367265:role/amplify-familystorage-dev-140743-authRole",
+      "Region": "ap-southeast-2",
+      "DeploymentBucketName": "amplify-familystorage-dev-140743-deployment",
+      "UnauthRoleName": "amplify-familystorage-dev-140743-unauthRole",
+      "StackName": "amplify-familystorage-dev-140743",
+      "StackId": "arn:aws:cloudformation:ap-southeast-2:467075367265:stack/amplify-familystorage-dev-140743/449af390-bab3-11eb-8e20-0aa290d68d78",
+      "AmplifyAppId": "d30trr0rxiiuuk"
+    },
+    "categories": {
+      "auth": {
+        "familystorage33c10722": {}
+      }
+    }
+  }
+}
