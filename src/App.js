@@ -4,7 +4,7 @@ import Amplify from 'aws-amplify';
 import { AmplifyAuthenticator, AmplifySignUp, AmplifySignOut, AmplifySignIn } from '@aws-amplify/ui-react';
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
 import awsconfig from './aws-exports';
-import Home from './pages/Home' ;
+import Home from './pages/HomeContainer' ;
 import { AppBar, Typography, Toolbar, Grid, Container } from '@material-ui/core';
 
 Amplify.configure(awsconfig);
@@ -20,8 +20,9 @@ const AuthStateApp = () => {
       });
   }, []);
 
-  return authState === AuthState.SignedIn && user ? (
-        <div>
+  return ( <div style={{ backgroundColor : 'gray' , color: 'white', height: '100vh'}} >
+    {authState === AuthState.SignedIn && user 
+      ? (<>
           <AppBar position="static" style={{ marginBottom: "20px"}}>
             <Toolbar>
               <Container maxWidth="lg">
@@ -34,10 +35,8 @@ const AuthStateApp = () => {
               </Container>
             </Toolbar>
           </AppBar>
-          <Home user={user} >
-          </Home>
-        </div>
-          ) : (
+          <Home user={user} />
+      </>) : (
       <AmplifyAuthenticator usernameAlias="email" >
         <AmplifySignUp
           slot="sign-up"
@@ -51,7 +50,8 @@ const AuthStateApp = () => {
         />
         <AmplifySignIn slot="sign-in" usernameAlias="email" />
       </AmplifyAuthenticator>
-  );
+    )}
+  </div>);
 }
 
 export default AuthStateApp;
