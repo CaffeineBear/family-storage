@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+import config from '../../config';
+const { UPLOADER_ENDPOINT } = config;
 
-const uploaderEndpoint = 'http://localhost:3000/dev/';
 const FILE_CHUNK_SIZE = 10_000_000;
 
 function allProgress(proms, progress_cb) {
@@ -43,7 +44,7 @@ const useUpload = (file, user) => {
       }
       // initiate upload in case of multi part upload.  
       let response = await fetch(
-          uploaderEndpoint + 'initiate-upload',
+          UPLOADER_ENDPOINT + 'initiate-upload',
           { ...settings, signal: myAbortController.signal }
       ).then(r => r.json()
       ).catch(err => console.log(err));
@@ -60,7 +61,7 @@ const useUpload = (file, user) => {
 
       // Get presigned url from the backend.
       response = await fetch(
-          uploaderEndpoint + 'get-presigned-url',
+          UPLOADER_ENDPOINT + 'get-presigned-url',
           { ...settings, signal: myAbortController.signal }
       ).then(r => r.json());
       
@@ -115,7 +116,7 @@ const useUpload = (file, user) => {
       };
 
       response = await fetch(
-        uploaderEndpoint + 'complete-upload',
+        UPLOADER_ENDPOINT + 'complete-upload',
         { method: 'POST', body: JSON.stringify(body), signal: myAbortController.signal }
       ).then(r => {
         setProgress(100);
