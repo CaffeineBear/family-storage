@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core';
 import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
 
 const FileItem = (props) => {
-  const { file, dataUrl, progress = 100 } = props;
+  const { file, dataUrl, progress = 0} = props;
   const iconSize = '100px';
   return (<>
     <Grid item container direction="row" xs={12} justify="flex-start" wrap='wrap' style={{height: iconSize, width: '100%', marginBottom: '40px'}}>

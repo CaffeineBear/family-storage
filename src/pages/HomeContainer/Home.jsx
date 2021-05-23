@@ -11,12 +11,13 @@ const Home = (props) => {
     onClick: handleOnClick,
     onSave: handleOnSave,
     onClose: handleClose,
-    openDialog: open
+    openDialog: open,
+    progresses
   } = props;
 
   return( <Container maxWidth="lg" style={{ color: 'inherit', backgroundColor: 'inherit'}}>
     <HomeHeader user={user} handleOnClick={handleOnClick} />
-    <UploadProgressMonitor addedFiles={addedFiles} /> 
+    <UploadProgressMonitor addedFiles={addedFiles} progresses={progresses} /> 
     <DropzoneDialog
       open={open}
       onSave={(files) => handleOnSave(files) }

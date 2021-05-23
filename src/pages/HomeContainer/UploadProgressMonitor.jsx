@@ -3,7 +3,7 @@ import FileItem from './FileItem';
 import { v4 as uuidv4 } from 'uuid';
 
 const UploadProgressMonitor = (props) => {
-  const { addedFiles } = props;
+  const { addedFiles, progresses } = props;
   return(<Paper 
     elevation={3} 
     style={{ 
@@ -13,7 +13,12 @@ const UploadProgressMonitor = (props) => {
           ? (
             <Grid container direction="column" justify="flex-start" style={{ width: '100%', padding: '20px'}}>
               {addedFiles.map(({file, dataUrl}) => {
-                return (<FileItem key={uuidv4()} file={file} dataUrl={dataUrl} />);              
+                return (<FileItem 
+                  progress={progresses[file.name]} 
+                  key={uuidv4()} 
+                  file={file} 
+                  dataUrl={dataUrl} 
+                />);              
               })} 
               </Grid>
             ) : (
