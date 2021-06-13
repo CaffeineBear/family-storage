@@ -19,6 +19,7 @@ const HomeContainer = (props) => {
   const handleOnClick = () => { setOpen(true); };
   const handleClose = () => { setOpen(false); };
   const handleOnSave = (files) => {
+    setOpen(false);
     // filtered out the file with the same name
     const filteredFiles = files.filter(file => {
       const currType = typeof (addedFiles.find(prevFile => {

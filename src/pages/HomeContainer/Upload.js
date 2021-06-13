@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import slugify from 'slugify';
 import config from '../../config';
 const { UPLOADER_ENDPOINT } = config;
 
@@ -31,15 +32,16 @@ const useUpload = (file, user) => {
     const myAbortController = new AbortController();
 
     const apiCalls = async () => {
-      const accessToken = user.signInUserSession.accessToken.jwtToken;
+      const idToken = user.signInUserSession.idToken.jwtToken;
       let settings = {
         method: 'POST',
         headers:{
-          'Authorization': 'Bearer ' + accessToken,
+          Authorization: idToken,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          fileName: file.name
+          fileName: file.name,
+          folderName: slugify(user.attributes.name),
         })
       }
       // initiate upload in case of multi part upload.  
@@ -52,7 +54,7 @@ const useUpload = (file, user) => {
 
       const numParts = Math.ceil(file.size / FILE_CHUNK_SIZE);
       const newBody = {
-        fileName: file.name,
+        fileName: file.name, 
         operation: 'putObject',
         numParts,
         ...response,
@@ -117,7 +119,14 @@ const useUpload = (file, user) => {
 
       response = await fetch(
         UPLOADER_ENDPOINT + 'complete-upload',
-        { method: 'POST', body: JSON.stringify(body), signal: myAbortController.signal }
+        { 
+          headers:{
+            Authorization: idToken,
+          },
+          method: 'POST', 
+          body: JSON.stringify(body), 
+          signal: myAbortController.signal 
+        }
       ).then(r => {
         setProgress(100);
         return r;
